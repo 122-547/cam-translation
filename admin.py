@@ -4,10 +4,12 @@ import numpy as np
 
 udp_client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 window_name = "Cam"
+udp_client.bind("0.0.0.0", 5823)
 
 try:
     cv2.namedWindow(window_name)
     while True:
+        udp_client.sendto(b"<ADMIN>", ("147.45.79.209", 5823))
         data, addr = udp_client.recvfrom(65536)
         
         if not data:

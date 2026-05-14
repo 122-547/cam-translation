@@ -15,7 +15,7 @@ try:
             print(f"Кадры пересланы админу ({admin}).")
         else:
             if data == b"<ADMIN>":
-                admin = addr
+                admin = (addr[0], 5823)
 
 finally:
     server.close()
