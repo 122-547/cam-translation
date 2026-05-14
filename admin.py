@@ -9,13 +9,12 @@ udp_client.bind(("0.0.0.0", 7575))
 try:
     cv2.namedWindow(window_name)
     while True:
-        udp_client.sendto(b"<ADMIN>", ("147.45.79.209", 5823))
+        udp_client.sendto(b"<ADMIN>", ("147.45.79.209", 5824))
         data, addr = udp_client.recvfrom(1024)
         if b"<OK>" in data:
             print("OK")
             break
     while True:
-        
         data, addr = udp_client.recvfrom(65536)
         if b"<OK>" in data:
             continue

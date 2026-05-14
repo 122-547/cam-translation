@@ -1,18 +1,23 @@
 import socket
 
 server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+accept_admin = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 admin = None
 
 try:
-    server.bind(("0.0.0.0", 5823))
+    
     print("UDP Сервер запущен и ожидает кадры...")
+    accept_admin.bind(("0.0.0.0", 5824))
     while admin is None:
-        data, addr = server.recvfrom(1024)
+        data, addr = accept_admin.recvfrom(1024)
         if b"<ADMIN>" in data:
             admin = (addr[0], 7575)
             for i in range(5):
                 server.sendto(b"<OK>", admin)
+    accept_admin.close()
+    server.bind(("0.0.0.0", 5823))
     while True:
+        
         data, addr = server.recvfrom(65536)
         if not data:
             break
@@ -22,4 +27,6 @@ try:
 
 finally:
     server.close()
+    if accept_admin:
+        accept_admin.close()
     print("Сервер остановлен.")
