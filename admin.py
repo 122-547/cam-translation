@@ -2,19 +2,9 @@ import socket
 import cv2
 import numpy as np
 
-# def send_admin_message():
-#     global tcp_client
-#     try:
-#         tcp_client.connect(("147.45.79.209", 5824))
-#         tcp_client.send(b"<ADMIN>")
-#         tcp_client.close()
-#     finally:
-#         if tcp_client:
-#             tcp_client.close()
-
 udp_client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 window_name = "Cam"
-# send_admin_message()
+
 try:
     cv2.namedWindow(window_name)
     while True:
